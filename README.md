@@ -1,1 +1,1 @@
-# Major_Project
+# Chronic Kidney Disease Prediction Using MachineLearning
