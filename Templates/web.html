@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kidney Disease Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .content {
+            max-width: 600px;
+            margin-left: 20px;
+            text-align: justify;
+            margin-top: -15%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FF725E;
+            font-family: 'Times New Roman';
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>A Predictive Framework for Chronic Kidney Disease Using Machine Learning Algorithms</h1>
+
+    <div class="container">
+	<form action="{{ url_for('predict')}}" method="post">
+            <table>
+                <!-- Form inputs here -->
+                <tr>
+                    <td><label for="age">Age:</label></td>
+                    <td><input type="text" name="age" required></td>
+            
+                    <td><label for="bp">Blood Pressure:</label></td>
+                    <td><input type="text" name="bp" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="sg">Specific Gravity:</label></td>
+                    <td><input type="text" name="sg" required></td>
+            
+                    <td><label for="al">Albumin:</label></td>
+                    <td><input type="text" name="al" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="su">Sugar:</label></td>
+                    <td><input type="text" name="su" required></td>
+            
+                    <td><label for="rbc">Red Blood Cells:</label></td>
+                    <td><input type="text" name="rbc" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="pc">Pus Cell:</label></td>
+                    <td><input type="text" name="pc" required></td>
+            
+                    <td><label for="pcc">Pus Cell Clumps:</label></td>
+                    <td><input type="text" name="pcc" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="ba">Bacteria:</label></td>
+                    <td><input type="text" name="ba" required></td>
+            
+                    <td><label for="bgr">Blood Glucose Random:</label></td>
+                    <td><input type="text" name="bgr" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="bu">Blood Urea:</label></td>
+                    <td><input type="text" name="bu" required></td>
+            
+                    <td><label for="sc">Serum Creatinine:</label></td>
+                    <td><input type="text" name="sc" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="sod">Sodium:</label></td>
+                    <td><input type="text" name="sod" required></td>
+            
+                    <td><label for="pot">Potassium:</label></td>
+                    <td><input type="text" name="pot" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="hemo">Hemoglobin:</label></td>
+                    <td><input type="text" name="hemo" required></td>
+            
+                    
+                    <td><label for="wc">White Blood Cell Count:</label></td>
+                    <td><input type="text" name="wc" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="rc">Red Blood Cell Count:</label></td>
+                    <td><input type="text" name="rc" required></td>
+            
+                    <td><label for="htn">Hypertension:</label></td>
+                    <td><input type="text" name="htn" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="dm">Diabetes Mellitus:</label></td>
+                    <td><input type="text" name="dm" required></td>
+            
+                    <td><label for="cad">Coronary Artery Disease:</label></td>
+                    <td><input type="text" name="cad" required></td>
+                 </tr>
+                 <tr>
+                    <td><label for="appet">Appetite:</label></td>
+                    <td><input type="text" name="appet" required></td>
+            
+                    <td><label for="pe">Pedal Edema:</label></td>
+                    <td><input type="text" name="pe" required></td>
+                </tr>
+                 <tr>
+                    <td><label for="ane">Anemia:</label></td>
+                    <td> <input type="text" name="ane" required></td>
+                </tr>
+                 
+            </table>
+            <input type="submit" value="Predict">
+        </form>
+
+        <div class="content">
+            <p style="font-size: 20px; line-height: 1.6;  color: #555;">
+                Chronic kidney disease (CKD) or Chronic Renal Disease (CRD) prediction using machine learning involves leveraging algorithms to analyze medical data and identify patterns indicative of CKD. By training models on patient data, such as lab results and medical history, machine learning can predict the likelihood of a patient developing CKD. This proactive approach allows for early diagnosis and intervention, potentially improving patient outcomes. Utilizing machine learning in CKD prediction can also help optimize treatment plans and resource allocation.
+            </p>
+            <center><img src="kidney.jpeg"></center>
+        </div>
+        
+</body>
+</html>

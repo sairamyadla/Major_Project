@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKD Stage Calculator</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <h2>CKD Stage Calculator</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td><label for="creatinine">Serum Creatinine Level (mg/dL):</label></td>
+            <td><input type="text" id="creatinine" name="creatinine" required></td>
+        </tr>
+        <tr>
+            <td><label for="age">Age (years):</label></td>
+            <td><input type="text" id="age" name="age" required></td>
+        </tr>
+    </table>
+    <button type="button" onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+
+    <script>
+        function calculate() {
+            var creatinine = parseFloat(document.getElementById('creatinine').value);
+            var age = parseInt(document.getElementById('age').value);
+
+            // Calculate eGFR (simplified MDRD equation)
+            var eGFR = 175 * Math.pow(creatinine, -1.154) * Math.pow(age, -0.203);
+
+            // Determine CKD stage
+            var stage;
+            if (eGFR >= 90) {
+                stage = "Stage 1";
+            } else if (eGFR >= 60) {
+                stage = "Stage 2";
+            } else if (eGFR >= 45) {
+                stage = "Stage 3a";
+            } else if (eGFR >= 30) {
+                stage = "Stage 3b";
+            } else if (eGFR >= 15) {
+                stage = "Stage 4";
+            } else {
+                stage = "Stage 5";
+            }
+
+            // Display results
+            document.getElementById('result').innerHTML = "<p>The estimated GFR is: " + eGFR.toFixed(2) + " mL/min/1.73m²</p><p>The CKD stage is: " + stage + "</p>";
+        }
+    </script>
+</body>
+</html>
